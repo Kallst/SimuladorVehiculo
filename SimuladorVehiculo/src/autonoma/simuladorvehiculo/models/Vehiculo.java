@@ -1,12 +1,8 @@
 package autonoma.simuladorvehiculo.models;
 
+import autonoma.simuladorvehiculo.exceptions.*;
 import autonoma.simuladorvehiculo.models.Llanta;
 import autonoma.simuladorvehiculo.models.Motor;
-
-/**
- *
- * @author sant9
- */
 
 public class Vehiculo {
     private Llanta llanta;
@@ -25,38 +21,38 @@ public class Vehiculo {
 
     // ===================== COMPORTAMIENTOS =====================
 
-    public String encender() {
+    public String encender() throws VehiculoNuevamenteEncendido, VehiculoEncendidoException {
         if (encendido) {
-            return "El vehículo ya está encendido.";
+            throw new VehiculoNuevamenteEncendido();
         } else {
             encendido = true;
-            return "El vehículo ha sido encendido.";
+            throw new VehiculoEncendidoException();
         }
     }
 
-    public String apagar() {
+    public String apagar() throws VehiculoApagadoNuevamenteException, VehiculoApagadoMovimientoException, VehiculoApagadoException {
         if (!encendido) {
-            return "El vehículo ya está apagado.";
+            throw new VehiculoApagadoNuevamenteException();
         } else if (velocidadActual > 60) {
             accidentado = true;
             encendido = false;
             velocidadActual = 0;
-            return "¡El vehículo se ha accidentado al apagarse a alta velocidad!";
+            throw new VehiculoApagadoMovimientoException();
         } else {
             encendido = false;
-            return "El vehículo ha sido apagado correctamente.";
+            throw new VehiculoApagadoException();
         }
     }
 
-    public String acelerar(int incremento) {
+    public String acelerar(int incremento) throws VehiculoApagadoException, VehiculoAccidentado, VehiculoPatinandoException, ExcederMotorException {
         if (!encendido) {
-            return "No se puede acelerar un vehículo apagado.";
+            throw new VehiculoApagadoException();
         }
         if (accidentado) {
-            return "No se puede acelerar un vehículo accidentado.";
+            throw new VehiculoAccidentado();
         }
         if (patinando) {
-            return "No se puede acelerar mientras el vehículo está patinando.";
+            throw new VehiculoPatinandoException();
         }
 
         velocidadActual += incremento;
@@ -65,50 +61,49 @@ public class Vehiculo {
             accidentado = true;
             encendido = false;
             velocidadActual = 0;
-            return "¡El motor ha explotado! El vehículo se accidentó.";
-        } else {
-            return "Vehículo acelerado. Velocidad actual: " + velocidadActual + " km/h.";
+            throw new ExcederMotorException();
         }
+
+        return "Vehículo acelerado. Velocidad actual: " + velocidadActual + " km/h.";
     }
 
-    public String frenar(int reduccion) {
+    public String frenar(int reduccion) throws VehiculoApagadoException, VehiculoAccidentado, VehiculoDetenidoFrenarException, FrenadoIntencidadException {
         if (!encendido) {
-            return "No se puede frenar un vehículo apagado.";
+            throw new VehiculoApagadoException();
         }
         if (accidentado) {
-            return "No se puede frenar un vehículo accidentado.";
+            throw new VehiculoAccidentado();
         }
         if (velocidadActual == 0) {
-            return "El vehículo ya está detenido.";
+            throw new VehiculoDetenidoFrenarException();
         }
 
         if (reduccion > velocidadActual) {
             patinando = true;
             velocidadActual = 0;
-            return "¡Frenado demasiado fuerte! El vehículo patinó y se detuvo.";
-        } else {
-            velocidadActual -= reduccion;
-            String mensaje = "Vehículo frenado. Velocidad actual: " + velocidadActual + " km/h.";
-
-            if (velocidadActual == 0 && patinando) {
-                patinando = false;
-                mensaje += " El vehículo ha dejado de patinar al detenerse.";
-            }
-
-            return mensaje;
+            throw new FrenadoIntencidadException();
         }
+
+        velocidadActual -= reduccion;
+        String mensaje = "Vehículo frenado. Velocidad actual: " + velocidadActual + " km/h.";
+
+        if (velocidadActual == 0 && patinando) {
+            patinando = false;
+            mensaje += " El vehículo ha dejado de patinar al detenerse.";
+        }
+
+        return mensaje;
     }
 
-    public String frenarBruscamente(int reduccion) {
+    public String frenarBruscamente(int reduccion) throws FrenadoBruscoException, VehiculoApagadoException, VehiculoAccidentado, VehiculoDetenidoFrenarException, FrenadoIntencidadException {
         String mensaje = "Frenado brusco con intensidad de " + reduccion + " km/h.";
 
         if (reduccion > 30 || velocidadActual > llanta.getLimiteVelocidad()) {
             patinando = true;
-            mensaje += " ¡Frenado brusco ha causado que el vehículo patine!";
+            throw new FrenadoBruscoException();
         }
 
-        mensaje += " " + frenar(reduccion);
-        return mensaje;
+        return mensaje + " " + frenar(reduccion);
     }
 
     // ===================== GETTERS =====================
