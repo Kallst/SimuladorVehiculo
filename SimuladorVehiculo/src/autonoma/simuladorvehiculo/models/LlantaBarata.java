@@ -2,8 +2,9 @@ package autonoma.simuladorvehiculo.models;
 
 /**
  *
- * @author LAPTOP
+ * @author Santiago Castro Marles
  */
+
 public class LlantaBarata extends Llanta {
     
     @Override
