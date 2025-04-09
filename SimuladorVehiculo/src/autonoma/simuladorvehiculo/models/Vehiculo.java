@@ -1,8 +1,6 @@
 package autonoma.simuladorvehiculo.models;
 
 import autonoma.simuladorvehiculo.exceptions.*;
-import autonoma.simuladorvehiculo.models.Llanta;
-import autonoma.simuladorvehiculo.models.Motor;
 
 public class Vehiculo {
     private Llanta llanta;
@@ -57,11 +55,13 @@ public class Vehiculo {
 
         velocidadActual += incremento;
 
-        if (velocidadActual > motor.obtenerVelocidadMaxima()) {
+        try {
+            motor.verificarVelocidad(velocidadActual);
+        } catch (ExcederMotorException e) {
             accidentado = true;
             encendido = false;
             velocidadActual = 0;
-            throw new ExcederMotorException();
+            throw e;
         }
 
         return "Vehículo acelerado. Velocidad actual: " + velocidadActual + " km/h.";

@@ -9,6 +9,12 @@ public class LlantaBuena extends Llanta {
     private static final int LIMITE_VELOCIDAD = 110;
     private static final String TIPO = "Buenas";
 
+    public LlantaBuena(String tipo) {
+        super(tipo);
+    }
+    
+    
+    
     @Override
     public int getLimiteVelocidad() {
         return LIMITE_VELOCIDAD;
