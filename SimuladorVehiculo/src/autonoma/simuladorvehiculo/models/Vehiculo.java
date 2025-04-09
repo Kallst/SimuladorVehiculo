@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package autonoma.simuladorvehiculo.models;
+
 import autonoma.simuladorvehiculo.models.Llanta;
+import autonoma.simuladorvehiculo.models.Motor;
 
 /**
  *
@@ -11,12 +9,62 @@ import autonoma.simuladorvehiculo.models.Llanta;
  */
 public class Vehiculo {
     private Llanta llanta;
-    int limite = llanta.getLimiteVelocidad();
-    String tipo = llanta.getTipo();
-    
     private Motor motor;
-    int velocidadMax = motor.obtenerVelocidadMaxima();
-    String tipoMotor = motor.obtenerTipo(); 
+
+    private int limite;
+    private String tipoLlanta;
+    private int velocidadMax;
+    private String tipoMotor;
+
+    // Constructor
+    public Vehiculo(Llanta llanta, Motor motor) {
+        this.llanta = llanta;
+        this.motor = motor;
+
+        this.limite = llanta.getLimiteVelocidad();
+        this.tipoLlanta = llanta.getTipo();
+        this.velocidadMax = motor.obtenerVelocidadMaxima();
+        this.tipoMotor = motor.obtenerTipo();
+    }
+
     
-    
+    public int getLimite() {
+        return limite;
+    }
+
+    public String getTipoLlanta() {
+        return tipoLlanta;
+    }
+
+    public int getVelocidadMax() {
+        return velocidadMax;
+    }
+
+    public String getTipoMotor() {
+        return tipoMotor;
+    }
+
+    public void setLlanta(Llanta llanta) {
+        this.llanta = llanta;
+    }
+
+    public void setMotor(Motor motor) {
+        this.motor = motor;
+    }
+
+    public void setLimite(int limite) {
+        this.limite = limite;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipoLlanta = tipo;
+    }
+
+    public void setVelocidadMax(int velocidadMax) {
+        this.velocidadMax = velocidadMax;
+    }
+
+    public void setTipoMotor(String tipoMotor) {
+        this.tipoMotor = tipoMotor;
+    }
 }
