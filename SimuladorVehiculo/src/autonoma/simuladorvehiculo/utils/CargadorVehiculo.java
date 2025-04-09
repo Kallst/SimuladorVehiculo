@@ -24,13 +24,13 @@ public class CargadorVehiculo {
             if (clave.equals("llantas")) {
                 switch (valor) {
                     case "buenas":
-                        llanta = new LlantaBuena();
+                        llanta = new LlantaBuena("Buenas");
                         break;
                     case "bonitas":
-                        llanta = new LlantaBonita();
+                        llanta = new LlantaBonita("Bonitas");
                         break;
                     case "baratas":
-                        llanta = new LlantaBarata();
+                        llanta = new LlantaBarata("Baratas");
                         break;
                     default:
                         throw new IllegalArgumentException("Tipo de llanta desconocido: " + valor);
