@@ -7,14 +7,17 @@ package autonoma.simuladorvehiculo.models;
 
 public class LlantaBarata extends Llanta {
     
-    @Override
-    public int getLimiteVelocidad() {
-        return 50;
-    }
+   private static final int LIMITE_VELOCIDAD = 50;
+   private static final String TIPO = "Barata";
 
-    @Override
-    public String getTipo() {
-        return "Baratas";
-    }
+   @Override
+   public int getLimiteVelocidad() {
+       return LIMITE_VELOCIDAD;
+   }
+
+   @Override
+   public String getTipo() {
+       return TIPO;
+   }
 }
 
