@@ -12,6 +12,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,6 +83,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
 
         btnEncender.setLabel("button1");
+        btnEncender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEncenderActionPerformed(evt);
+            }
+        });
 
         btnApagar.setLabel("button1");
 
@@ -124,6 +131,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEncenderActionPerformed
 
     /**
      * @param args the command line arguments

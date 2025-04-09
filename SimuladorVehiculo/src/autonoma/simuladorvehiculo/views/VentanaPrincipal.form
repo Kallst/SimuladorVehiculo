@@ -136,6 +136,9 @@
       <Properties>
         <Property name="label" type="java.lang.String" value="button1"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEncenderActionPerformed"/>
+      </Events>
     </Component>
     <Component class="java.awt.Button" name="btnApagar">
       <Properties>
