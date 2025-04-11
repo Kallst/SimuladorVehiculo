@@ -12,6 +12,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     VentanaApagarVehiculo ventanaApagar = new VentanaApagarVehiculo (this, true);
     Encender ventanaEncender = new Encender(this, true);
+    VentanaAcelerarVehiculo ventanaAcelerar = new VentanaAcelerarVehiculo(this, true);
+    VentanaFrenarVehiculo ventanaFrenar = new VentanaFrenarVehiculo(this, true);
+    VentanaFrenarBrusco ventanaFrenarB = new VentanaFrenarBrusco(this, true);
     
     public VentanaPrincipal() {
         initComponents();
@@ -46,6 +49,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,7 +156,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setText("a");
+        jToggleButton1.setText("..");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         EstadoVehiculo.setFont(new java.awt.Font("Unispace", 3, 12)); // NOI18N
         EstadoVehiculo.setText("ESTADO ACTUAL");
@@ -166,6 +175,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorvehiculo/images/Freno.png"))); // NOI18N
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simuladorvehiculo/images/FrenoB.png"))); // NOI18N
+
+        jButton1.setBackground(new java.awt.Color(69, 55, 139));
+        jButton1.setFont(new java.awt.Font("Unispace", 3, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("SALIR");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -207,6 +221,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,7 +233,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton1)
                     .addComponent(EstadoVehiculo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -229,7 +247,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnEncender, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFrenar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFrenarBrusco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(101, 101, 101))
+                .addGap(72, 72, 72)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -265,15 +285,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnApagarActionPerformed
 
     private void btnAcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcelerarActionPerformed
-        // TODO add your handling code here:
+        ventanaAcelerar.setVisible(true);
+        ventanaAcelerar.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAcelerarActionPerformed
 
     private void btnFrenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFrenarActionPerformed
-        // TODO add your handling code here:
+        ventanaFrenar.setVisible(true);
+        ventanaFrenar.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnFrenarActionPerformed
 
     private void btnFrenarBruscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFrenarBruscoActionPerformed
-        // TODO add your handling code here:
+        ventanaFrenarB.setVisible(true);
+        ventanaFrenarB.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnFrenarBruscoActionPerformed
 
     private void btnEncenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseClicked
@@ -288,6 +311,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEncenderMouseExited
 
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+       if (jToggleButton1.isSelected()) {
+        jToggleButton1.setText("ENCENDIDO");
+        
+    } else {
+        jToggleButton1.setText("APAGADO");
+       
+    }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -300,6 +333,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private java.awt.Button btnEncender;
     private java.awt.Button btnFrenar;
     private java.awt.Button btnFrenarBrusco;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
