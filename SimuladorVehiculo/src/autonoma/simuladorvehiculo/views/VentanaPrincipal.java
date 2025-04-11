@@ -1,5 +1,6 @@
 package autonoma.simuladorvehiculo.views;
 
+
 /**
  *
  * @author Santiago Castro Marles
@@ -9,9 +10,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
+    
+    VentanaEncenderVehiculo ventanaEncender = new VentanaEncenderVehiculo();
+    
     public VentanaPrincipal() {
         initComponents();
     }
+    
     
     
 
@@ -344,7 +349,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
-        // TODO add your handling code here:
+        ventanaEncender.setVisible(true);
+        ventanaEncender.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnEncenderActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
