@@ -10,7 +10,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
-    
+    VentanaApagarVehiculo ventanaApagar = new VentanaApagarVehiculo (this, true);
     Encender ventanaEncender = new Encender(this, true);
     
     public VentanaPrincipal() {
@@ -256,11 +256,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
         ventanaEncender.setVisible(true);
         ventanaEncender.setLocationRelativeTo(null);
-        this.dispose();
+        
     }//GEN-LAST:event_btnEncenderActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
-        // TODO add your handling code here:
+        ventanaApagar.setVisible(true);
+        ventanaApagar.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnApagarActionPerformed
 
     private void btnAcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcelerarActionPerformed
