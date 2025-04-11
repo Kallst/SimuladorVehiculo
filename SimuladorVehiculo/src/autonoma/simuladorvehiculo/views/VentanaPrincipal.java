@@ -49,7 +49,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Emerc = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
-        jLabel8 = new javax.swing.JLabel();
+        EstadoVehiculo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,6 +122,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnEncender.setFont(new java.awt.Font("Unispace", 2, 12)); // NOI18N
         btnEncender.setForeground(new java.awt.Color(255, 255, 255));
         btnEncender.setLabel("ENCENDER");
+        btnEncender.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEncenderMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEncenderMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEncenderMouseExited(evt);
+            }
+        });
         btnEncender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncenderActionPerformed(evt);
@@ -248,8 +259,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jToggleButton1.setText("a");
 
-        jLabel8.setFont(new java.awt.Font("Unispace", 3, 12)); // NOI18N
-        jLabel8.setText("ESTADO ACTUAL");
+        EstadoVehiculo.setFont(new java.awt.Font("Unispace", 3, 12)); // NOI18N
+        EstadoVehiculo.setText("ESTADO ACTUAL");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -279,7 +290,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel8)
+                                .addComponent(EstadoVehiculo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
@@ -315,7 +326,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jToggleButton1)
-                            .addComponent(jLabel8))
+                            .addComponent(EstadoVehiculo))
                         .addGap(37, 37, 37)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Emerc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -369,6 +380,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFrenarBruscoActionPerformed
 
+    private void btnEncenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEncenderMouseClicked
+
+    private void btnEncenderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEncenderMouseEntered
+
+    private void btnEncenderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEncenderMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -379,6 +402,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel Apagar;
     private javax.swing.JPanel Emerc;
     private javax.swing.JPanel Encender;
+    private javax.swing.JLabel EstadoVehiculo;
     private javax.swing.JPanel Frenar;
     private java.awt.Button btnAcelerar;
     private java.awt.Button btnApagar;
@@ -392,7 +416,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JToggleButton jToggleButton1;
