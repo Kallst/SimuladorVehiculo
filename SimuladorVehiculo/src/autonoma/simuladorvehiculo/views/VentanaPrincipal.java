@@ -11,7 +11,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Creates new form VentanaPrincipal
      */
     
-    VentanaEncenderVehiculo ventanaEncender = new VentanaEncenderVehiculo();
+    Encender ventanaEncender = new Encender(this, true);
     
     public VentanaPrincipal() {
         initComponents();
@@ -265,6 +265,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
         ventanaEncender.setVisible(true);
         ventanaEncender.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_btnEncenderActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed

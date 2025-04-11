@@ -12,7 +12,6 @@ public class SimuladorVehiculo {
         
         VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
         ventanaPrincipal.setVisible(true);
-        ventanaPrincipal.setLocationRelativeTo(null);
 //        Scanner scanner = new Scanner(System.in);
 //
 //        // Crear motor y llanta (elige qué motor/llanta deseas usar aquí)
