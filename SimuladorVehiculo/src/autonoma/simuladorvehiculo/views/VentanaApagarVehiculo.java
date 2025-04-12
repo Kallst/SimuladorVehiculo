@@ -4,18 +4,22 @@
  */
 package autonoma.simuladorvehiculo.views;
 
+import autonoma.simuladorvehiculo.models.Vehiculo;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author PC-ASUS
  */
 public class VentanaApagarVehiculo extends javax.swing.JDialog {
-
+    private Vehiculo vehiculo;
     /**
      * Creates new form VentanaApagarVehiculo
      */
-    public VentanaApagarVehiculo(java.awt.Frame parent, boolean modal) {
+    public VentanaApagarVehiculo(java.awt.Frame parent, boolean modal, Vehiculo vehiculo) {
         super(parent, modal);
         initComponents();
+        this.vehiculo = vehiculo; // Recibimos el vehículo para interactuar con él
     }
 
     /**
@@ -96,7 +100,13 @@ public class VentanaApagarVehiculo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose();
+         try {
+            vehiculo.apagar(); // Apaga el vehículo
+            JOptionPane.showMessageDialog(this, "Vehículo apagado correctamente.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        dispose(); // Cerramos la ventana
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

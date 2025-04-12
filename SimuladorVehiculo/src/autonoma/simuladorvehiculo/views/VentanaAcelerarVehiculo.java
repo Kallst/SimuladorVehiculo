@@ -4,18 +4,21 @@
  */
 package autonoma.simuladorvehiculo.views;
 
+import autonoma.simuladorvehiculo.models.Vehiculo;
+
 /**
  *
  * @author PC-ASUS
  */
 public class VentanaAcelerarVehiculo extends javax.swing.JDialog {
-
+    private Vehiculo vehiculo;
     /**
      * Creates new form VentanaAcelerarVehiculo
      */
     public VentanaAcelerarVehiculo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.vehiculo = vehiculo;
     }
 
     /**

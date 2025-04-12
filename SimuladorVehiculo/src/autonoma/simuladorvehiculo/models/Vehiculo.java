@@ -19,14 +19,14 @@ public class Vehiculo {
 
     // ===================== COMPORTAMIENTOS =====================
 
-    public String encender() throws VehiculoNuevamenteEncendido, VehiculoEncendidoException {
-        if (encendido) {
-            throw new VehiculoNuevamenteEncendido();
-        } else {
-            encendido = true;
-            throw new VehiculoEncendidoException();
-        }
+    public String encender() throws VehiculoNuevamenteEncendido {
+    if (encendido) {
+        throw new VehiculoNuevamenteEncendido();
+    } else {
+        encendido = true;
+        return "Vehículo encendido correctamente.";
     }
+}
 
     public String apagar() throws VehiculoApagadoNuevamenteException, VehiculoApagadoMovimientoException, VehiculoApagadoException {
         if (!encendido) {

@@ -4,7 +4,11 @@
  */
 package autonoma.simuladorvehiculo.views;
 
+import autonoma.simuladorvehiculo.exceptions.VehiculoAccidentado;
+import autonoma.simuladorvehiculo.exceptions.VehiculoEncendidoException;
+import autonoma.simuladorvehiculo.exceptions.VehiculoNuevamenteEncendido;
 import autonoma.simuladorvehiculo.models.Vehiculo;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,10 +19,21 @@ public class Encender extends javax.swing.JDialog {
     /**
      * Creates new form Encender
      */
-    public Encender(java.awt.Frame parent, boolean modal, Vehiculo vehiculo) {
+    public Encender(java.awt.Frame parent, boolean modal, Vehiculo vehiculo) throws VehiculoNuevamenteEncendido, VehiculoEncendidoException {
         super(parent, modal);
         initComponents();
+        
+        try {
+            vehiculo.encender();  // Esto puede lanzar VehiculoNuevamenteEncendido
+            JOptionPane.showMessageDialog(this, "Vehículo encendido.");
+        } catch (VehiculoNuevamenteEncendido e) {
+            JOptionPane.showMessageDialog(this, "El vehículo ya estaba encendido.");
+        }
+    
+
+        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

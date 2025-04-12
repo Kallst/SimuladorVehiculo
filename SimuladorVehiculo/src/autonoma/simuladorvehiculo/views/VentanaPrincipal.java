@@ -1,11 +1,19 @@
 package autonoma.simuladorvehiculo.views;
 
+import autonoma.simuladorvehiculo.exceptions.ExcederMotorException;
+import autonoma.simuladorvehiculo.exceptions.FrenadoBruscoException;
+import autonoma.simuladorvehiculo.exceptions.FrenadoIntencidadException;
+import autonoma.simuladorvehiculo.exceptions.VehiculoAccidentado;
+import autonoma.simuladorvehiculo.exceptions.VehiculoApagadoException;
+import autonoma.simuladorvehiculo.exceptions.VehiculoDetenidoFrenarException;
 import autonoma.simuladorvehiculo.exceptions.VehiculoEncendidoException;
 import autonoma.simuladorvehiculo.exceptions.VehiculoNuevamenteEncendido;
+import autonoma.simuladorvehiculo.exceptions.VehiculoPatinandoException;
 import autonoma.simuladorvehiculo.models.Vehiculo;
 import autonoma.simuladorvehiculo.utils.ReproducirSonido;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -13,22 +21,23 @@ import java.util.logging.Logger;
  * @author Santiago Castro Marles
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form VentanaPrincipal
      */
     ReproducirSonido reproducir;
-    VentanaApagarVehiculo ventanaApagar = new VentanaApagarVehiculo (this, true);
+    VentanaApagarVehiculo ventanaApagar;
     Vehiculo vehiculo;
-    Encender ventanaEncender = new Encender(this, true, vehiculo);
-    VentanaAcelerarVehiculo ventanaAcelerar = new VentanaAcelerarVehiculo(this, true);
+    Encender ventanaEncender;
+    VentanaAcelerarVehiculo ventanaAcelerar;
     VentanaFrenarVehiculo ventanaFrenar = new VentanaFrenarVehiculo(this, true);
     VentanaFrenarBrusco ventanaFrenarB = new VentanaFrenarBrusco(this, true);
+
+    public VentanaPrincipal(Vehiculo vehiculo) throws VehiculoEncendidoException, VehiculoNuevamenteEncendido {
+    initComponents();
+    this.vehiculo = vehiculo;
     
-    public VentanaPrincipal(Vehiculo vehiculo) {
-        initComponents();
-        this.vehiculo = vehiculo;
-    }
+}
     
     
     
@@ -313,45 +322,106 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
-
-        if (!this.vehiculo.isEncendido()) {
+    
+    
+    try {
+        if (!vehiculo.isEncendido()) {
+            // Inicializamos la ventana de encender solo cuando se necesite.
+            ventanaEncender = new Encender(this, true, vehiculo);
             ventanaEncender.setLocationRelativeTo(null);
             ventanaEncender.setVisible(true);
             ReproducirSonido.reproducirSonido("src/autonoma/simuladorvehiculo/sounds/CarroEncendiendo.wav");
-
-            // Después de cerrar el diálogo, actualizamos el estado
-            
         } else {
-            try {
-                String mensaje = vehiculo.encender(); // Puede lanzar excepciones personalizadas
-                jToggleButton1.setText(mensaje);
-            } catch (VehiculoEncendidoException | VehiculoNuevamenteEncendido e) {
-                jToggleButton1.setText(e.getMessage());
-            }
+            throw new VehiculoNuevamenteEncendido();
         }
+    } catch (VehiculoNuevamenteEncendido e) {
+        JOptionPane.showMessageDialog(this, "El vehículo ya estaba encendido.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
 
-
-        
+ 
     }//GEN-LAST:event_btnEncenderActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
-        ventanaApagar.setVisible(true);
+        ventanaApagar = new VentanaApagarVehiculo(this, true, vehiculo);
         ventanaApagar.setLocationRelativeTo(null);
+        ventanaApagar.setVisible(true);
     }//GEN-LAST:event_btnApagarActionPerformed
 
     private void btnAcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcelerarActionPerformed
-        ventanaAcelerar.setVisible(true);
-        ventanaAcelerar.setLocationRelativeTo(null);
+        try {
+        // Solicitar al usuario el incremento de velocidad
+        int incremento = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese incremento de velocidad:"));
+
+        // Llamar al método acelerar del vehículo
+        String mensaje = vehiculo.acelerar(incremento);
+
+        // Mostrar mensaje de éxito
+        JOptionPane.showMessageDialog(this, mensaje);
+    } catch (VehiculoApagadoException e) {
+        JOptionPane.showMessageDialog(this, "El vehículo está apagado. No puede acelerar.");
+    } catch (VehiculoAccidentado e) {
+        JOptionPane.showMessageDialog(this, "El vehículo está accidentado. No puede acelerar.");
+    } catch (VehiculoPatinandoException e) {
+        JOptionPane.showMessageDialog(this, "El vehículo está patinando. No puede acelerar.");
+    } catch (ExcederMotorException e) {
+        JOptionPane.showMessageDialog(this, "La velocidad excedió el límite del motor. El vehículo se ha accidentado.");
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un valor numérico válido.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnAcelerarActionPerformed
 
     private void btnFrenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFrenarActionPerformed
-        ventanaFrenar.setVisible(true);
-        ventanaFrenar.setLocationRelativeTo(null);
+        try {
+        // Solicitar al usuario el valor de reducción de velocidad
+        int reduccion = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la reducción de velocidad:"));
+
+        // Llamar al método frenar del vehículo
+        String mensaje = vehiculo.frenar(reduccion);
+
+        // Mostrar mensaje de éxito
+        JOptionPane.showMessageDialog(this, mensaje);
+    } catch (VehiculoApagadoException e) {
+        JOptionPane.showMessageDialog(this, "El vehículo está apagado. No puede frenar.");
+    } catch (VehiculoAccidentado e) {
+        JOptionPane.showMessageDialog(this, "El vehículo está accidentado. No puede frenar.");
+    } catch (VehiculoDetenidoFrenarException e) {
+        JOptionPane.showMessageDialog(this, "El vehículo ya está detenido. No puede frenar.");
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un valor numérico válido.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnFrenarActionPerformed
 
     private void btnFrenarBruscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFrenarBruscoActionPerformed
-        ventanaFrenarB.setVisible(true);
-        ventanaFrenarB.setLocationRelativeTo(null);
+        try {
+        // Solicitar al usuario la intensidad del frenado
+        int reduccion = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la intensidad del frenado:"));
+
+        // Llamar al método frenarBruscamente del vehículo
+        String mensaje = vehiculo.frenarBruscamente(reduccion);
+
+        // Mostrar mensaje de éxito
+        JOptionPane.showMessageDialog(this, mensaje);
+    } catch (VehiculoApagadoException e) {
+        JOptionPane.showMessageDialog(this, "El vehículo está apagado. No puede frenar.");
+    } catch (VehiculoAccidentado e) {
+        JOptionPane.showMessageDialog(this, "El vehículo está accidentado. No puede frenar.");
+    } catch (VehiculoDetenidoFrenarException e) {
+        JOptionPane.showMessageDialog(this, "El vehículo ya está detenido. No puede frenar.");
+    } catch (FrenadoBruscoException e) {
+        JOptionPane.showMessageDialog(this, "Frenado demasiado brusco. El vehículo está patinando.");
+    } catch (FrenadoIntencidadException e) {
+        JOptionPane.showMessageDialog(this, "La reducción de velocidad fue demasiado intensa. El vehículo comenzó a patinar.");
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un valor numérico válido.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnFrenarBruscoActionPerformed
 
     private void btnEncenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseClicked
