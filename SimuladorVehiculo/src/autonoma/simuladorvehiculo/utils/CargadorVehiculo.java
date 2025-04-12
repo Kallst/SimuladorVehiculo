@@ -23,7 +23,7 @@ public class CargadorVehiculo {
 
             if (clave.equals("llantas")) {
                 switch (valor) {
-                    case "buenas":
+                    case "buenas": 
                         llanta = new LlantaBuena("Buenas");
                         break;
                     case "bonitas":

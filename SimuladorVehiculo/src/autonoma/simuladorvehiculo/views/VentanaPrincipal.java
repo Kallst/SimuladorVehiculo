@@ -1,5 +1,11 @@
 package autonoma.simuladorvehiculo.views;
 
+import autonoma.simuladorvehiculo.exceptions.VehiculoEncendidoException;
+import autonoma.simuladorvehiculo.exceptions.VehiculoNuevamenteEncendido;
+import autonoma.simuladorvehiculo.models.Vehiculo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -11,13 +17,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Creates new form VentanaPrincipal
      */
     VentanaApagarVehiculo ventanaApagar = new VentanaApagarVehiculo (this, true);
+    Vehiculo vehiculo;
     Encender ventanaEncender = new Encender(this, true);
     VentanaAcelerarVehiculo ventanaAcelerar = new VentanaAcelerarVehiculo(this, true);
     VentanaFrenarVehiculo ventanaFrenar = new VentanaFrenarVehiculo(this, true);
     VentanaFrenarBrusco ventanaFrenarB = new VentanaFrenarBrusco(this, true);
     
-    public VentanaPrincipal() {
+    public VentanaPrincipal(Vehiculo vehiculo) {
         initComponents();
+        this.vehiculo = vehiculo;
     }
     
     
@@ -32,6 +40,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jDialog2 = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -50,6 +60,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -279,8 +311,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
-        ventanaEncender.setVisible(true);
-        ventanaEncender.setLocationRelativeTo(null);
+        
+        if (!this.vehiculo.isEncendido())
+        {   
+            ventanaEncender.setLocationRelativeTo(null);
+            ventanaEncender.setVisible(true);
+            try {
+                this.vehiculo.encender();
+            } catch (VehiculoNuevamenteEncendido ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (VehiculoEncendidoException ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
     }//GEN-LAST:event_btnEncenderActionPerformed
 
@@ -343,6 +386,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private java.awt.Button btnFrenar;
     private java.awt.Button btnFrenarBrusco;
     private javax.swing.JButton jButton1;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
