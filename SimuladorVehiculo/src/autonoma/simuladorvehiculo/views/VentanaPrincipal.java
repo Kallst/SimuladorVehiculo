@@ -63,7 +63,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnAcelerar = new java.awt.Button();
         btnEncender = new java.awt.Button();
         btnApagar = new java.awt.Button();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        btnEstado = new javax.swing.JToggleButton();
         EstadoVehiculo = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -199,10 +199,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setText("..");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnEstado.setText("..");
+        btnEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                btnEstadoActionPerformed(evt);
             }
         });
 
@@ -267,7 +267,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(EstadoVehiculo)
                         .addGap(18, 18, 18)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -279,7 +279,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
+                    .addComponent(btnEstado)
                     .addComponent(EstadoVehiculo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -436,15 +436,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEncenderMouseExited
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-       if (jToggleButton1.isSelected()) {
-        jToggleButton1.setText("ENCENDIDO");
-        
-    } else {
-        jToggleButton1.setText("APAGADO");
-       
-    }
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void btnEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoActionPerformed
+       // Acción para el botón "encender"
+    btnEncender.addActionListener(e -> {
+    btnEstado.setSelected(true); // Cambiar el estado del botón
+    btnEstado.setText("ENCENDIDO"); // Actualizar el texto
+    });
+
+    // Acción para el botón "apagar"
+    btnApagar.addActionListener(e -> {
+    btnEstado.setSelected(false); // Cambiar el estado del botón
+    btnEstado.setText("APAGADO"); // Actualizar el texto
+    });
+    }//GEN-LAST:event_btnEstadoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
@@ -460,6 +464,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private java.awt.Button btnAcelerar;
     private java.awt.Button btnApagar;
     private java.awt.Button btnEncender;
+    private javax.swing.JToggleButton btnEstado;
     private java.awt.Button btnFrenar;
     private java.awt.Button btnFrenarBrusco;
     private javax.swing.JButton jButton1;
@@ -475,6 +480,5 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }
