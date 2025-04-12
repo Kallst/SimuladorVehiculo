@@ -3,6 +3,7 @@ package autonoma.simuladorvehiculo.views;
 import autonoma.simuladorvehiculo.exceptions.VehiculoEncendidoException;
 import autonoma.simuladorvehiculo.exceptions.VehiculoNuevamenteEncendido;
 import autonoma.simuladorvehiculo.models.Vehiculo;
+import autonoma.simuladorvehiculo.utils.ReproducirSonido;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,9 +17,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
+    ReproducirSonido reproducir;
     VentanaApagarVehiculo ventanaApagar = new VentanaApagarVehiculo (this, true);
     Vehiculo vehiculo;
-    Encender ventanaEncender = new Encender(this, true);
+    Encender ventanaEncender = new Encender(this, true, vehiculo);
     VentanaAcelerarVehiculo ventanaAcelerar = new VentanaAcelerarVehiculo(this, true);
     VentanaFrenarVehiculo ventanaFrenar = new VentanaFrenarVehiculo(this, true);
     VentanaFrenarBrusco ventanaFrenarB = new VentanaFrenarBrusco(this, true);
@@ -311,19 +313,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
-        
-        if (!this.vehiculo.isEncendido())
-        {   
+
+        if (!this.vehiculo.isEncendido()) {
             ventanaEncender.setLocationRelativeTo(null);
             ventanaEncender.setVisible(true);
+            ReproducirSonido.reproducirSonido("src/autonoma/simuladorvehiculo/sounds/CarroEncendiendo.wav");
+
+            // Después de cerrar el diálogo, actualizamos el estado
+            
+        } else {
             try {
-                this.vehiculo.encender();
-            } catch (VehiculoNuevamenteEncendido ex) {
-                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (VehiculoEncendidoException ex) {
-                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                String mensaje = vehiculo.encender(); // Puede lanzar excepciones personalizadas
+                jToggleButton1.setText(mensaje);
+            } catch (VehiculoEncendidoException | VehiculoNuevamenteEncendido e) {
+                jToggleButton1.setText(e.getMessage());
             }
         }
+
+
         
     }//GEN-LAST:event_btnEncenderActionPerformed
 

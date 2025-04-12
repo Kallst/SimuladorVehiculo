@@ -4,6 +4,8 @@
  */
 package autonoma.simuladorvehiculo.views;
 
+import autonoma.simuladorvehiculo.models.Vehiculo;
+
 /**
  *
  * @author PC-ASUS
@@ -13,7 +15,7 @@ public class Encender extends javax.swing.JDialog {
     /**
      * Creates new form Encender
      */
-    public Encender(java.awt.Frame parent, boolean modal) {
+    public Encender(java.awt.Frame parent, boolean modal, Vehiculo vehiculo) {
         super(parent, modal);
         initComponents();
     }
