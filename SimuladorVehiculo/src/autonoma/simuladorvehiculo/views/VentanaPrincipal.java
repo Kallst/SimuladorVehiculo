@@ -330,6 +330,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             ventanaEncender = new Encender(this, true, vehiculo);
             ventanaEncender.setLocationRelativeTo(null);
             ventanaEncender.setVisible(true);
+            btnEstado.setText("Encendido");
             ReproducirSonido.reproducirSonido("src/autonoma/simuladorvehiculo/sounds/CarroEncendiendo.wav");
         } else {
             throw new VehiculoNuevamenteEncendido();
@@ -347,6 +348,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaApagar = new VentanaApagarVehiculo(this, true, vehiculo);
         ventanaApagar.setLocationRelativeTo(null);
         ventanaApagar.setVisible(true);
+        btnEstado.setText("Apagado");
     }//GEN-LAST:event_btnApagarActionPerformed
 
     private void btnAcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcelerarActionPerformed
@@ -356,6 +358,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         // Llamar al método acelerar del vehículo
         String mensaje = vehiculo.acelerar(incremento);
+        btnEstado.setText("Acelerando/Encendido");
 
         // Mostrar mensaje de éxito
         JOptionPane.showMessageDialog(this, mensaje);
